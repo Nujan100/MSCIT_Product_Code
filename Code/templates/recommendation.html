@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            overflow: hidden;
+            justify-content: center;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 5px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        li.dark-mode {
+            background-color: #444;
+            border: 1px solid #666;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recommendations for {{ new_product }}</h1>
+    <ul>
+        {% for product in recommendations %}
+            <li>{{ product }}</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        // Add JavaScript for dark mode toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+
+            // Check if dark mode preference is stored in localStorage
+            const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+
+            // Apply dark mode if the preference is true
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            }
+
+            // Toggle dark mode on button click
+            document.addEventListener('click', function(event) {
+                if (event.target.id === 'toggle-dark-mode') {
+                    body.classList.toggle('dark-mode');
+                    const currentMode = body.classList.contains('dark-mode');
+                    localStorage.setItem('dark-mode', currentMode);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
